@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScenarioController : MonoBehaviour
 {
     [SerializeField]
-    private CharacterController _character;
+    private CharacterManager _character;
     [SerializeField]
     private HudGameplayController _hud;
 
