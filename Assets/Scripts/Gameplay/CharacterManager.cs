@@ -10,17 +10,20 @@ public class CharacterManager : MonoBehaviour
     private CollisionEventLogic _frontColliderLogic;
     [Header("Physics")]
     [SerializeField]
-    private float _speed = 2.0f;
+    private float _moveSpeed = 3.5f;
     [SerializeField]
-    private float _jumpForce = 2.0f;
+    private float _jumpSpeed = 7.5f;
+    [SerializeField]
+    private float _wallSlideSpeed = -1.0f;
 
     public bool IsGrounded { get; private set; }
     public bool IsFacingWall { get; private set; }
     public bool IsJumping { get; private set; }
+    public bool IsFalling { get; private set; }
 
     private Rigidbody2D _rigidbody2D;
     private bool _mustJump = false;
-    private Vector2 _forceToApply = Vector2.zero;
+    private Vector2 _speed = Vector2.zero;
 
     public void Initialize()
     {
@@ -43,7 +46,7 @@ public class CharacterManager : MonoBehaviour
     private void OnFootCollisionEnter(Transform t)
     {
         IsGrounded = true;
-        IsJumping = false;
+        IsFalling = false;
     }
 
     private void OnFootCollisionExit(Transform t)
@@ -63,11 +66,6 @@ public class CharacterManager : MonoBehaviour
 
     public void OnTapDown()
     {
-        if(IsJumping)
-        {
-            return;
-        }
-
         if (IsGrounded)
         {
             // simple jump
@@ -81,6 +79,7 @@ public class CharacterManager : MonoBehaviour
             {
                 // rotate and jump
                 transform.right *= -1.0f;
+                IsFalling = false;
                 _mustJump = true;
             }
         }        
@@ -88,20 +87,31 @@ public class CharacterManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        var _speed = _rigidbody2D.velocity;
         if ((IsGrounded || IsJumping) && !IsFacingWall)
         {
-            var speed = _rigidbody2D.velocity;
-            speed.x = transform.right.x * _speed;
-            _rigidbody2D.velocity = speed;
+            _speed.x = transform.right.x * _moveSpeed;
         }
 
         if (_mustJump)
         {
-            _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            //_rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            _speed.y = _jumpSpeed;
             IsJumping = true;
         }
 
+        if (IsJumping && _speed.y < 0.0f)
+        {
+            IsJumping = false;
+            IsFalling = true;
+        }
+
+        if (IsFalling && IsFacingWall)
+        {
+            _speed.y = _wallSlideSpeed;
+        }
+
         _mustJump = false;
-        _forceToApply = Vector2.zero;
+        _rigidbody2D.velocity = _speed;
     }
 }

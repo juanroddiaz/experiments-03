@@ -712,8 +712,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _footColliderLogic: {fileID: 118388733}
   _frontColliderLogic: {fileID: 1795883217}
-  _speed: 3.5
-  _jumpForce: 22.5
+  _moveSpeed: 4
+  _jumpSpeed: 7.5
+  _wallSlideSpeed: -1
 --- !u!50 &985355957
 Rigidbody2D:
   serializedVersion: 4
