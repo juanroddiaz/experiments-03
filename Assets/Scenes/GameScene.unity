@@ -389,7 +389,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3, y: 0.35}
+  m_Size: {x: 1, y: 0.35}
   m_EdgeRadius: 0
 --- !u!114 &118388733
 MonoBehaviour:
@@ -690,7 +690,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985355954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.39, y: 2, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: 7.5, y: 7.5, z: 1}
   m_Children:
   - {fileID: 1795883215}
@@ -712,7 +712,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _footColliderLogic: {fileID: 118388733}
   _frontColliderLogic: {fileID: 1795883217}
-  _speed: 2
+  _speed: 3.5
+  _jumpForce: 22.5
 --- !u!50 &985355957
 Rigidbody2D:
   serializedVersion: 4
@@ -725,10 +726,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1007,6 +1008,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1739777300}
     m_Modifications:
+    - target: {fileID: 1436419455, guid: 4d9fef59f4abd034091ed3e3a868dfd8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5809674223240184577, guid: 4d9fef59f4abd034091ed3e3a868dfd8,
         type: 3}
       propertyPath: m_Name

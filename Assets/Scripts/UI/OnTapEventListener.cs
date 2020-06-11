@@ -4,18 +4,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class OnTapEventListener : MonoBehaviour, IPointerClickHandler
+public class OnTapEventListener : MonoBehaviour, IPointerDownHandler
 {
-    private Action _onClick;
+    private Action _onTapDown;
 
-    public void Initialize(Action onClick)
+    public void Initialize(Action onTapDown)
     {
-        _onClick = onClick;
+        _onTapDown = onTapDown;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("OnPointerClick");
-        _onClick?.Invoke();
+        Debug.Log("OnPointerDown");
+        _onTapDown?.Invoke();
     }
 }

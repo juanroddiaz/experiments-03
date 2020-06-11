@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HudGameplayController : MonoBehaviour
 {
     [Header("Controls")]
+    [SerializeField]
+    private OnTapEventListener _onTapListener;
     [Header("Panels")]
     [SerializeField]
     private GameObject _controlsPanel;
@@ -13,9 +16,10 @@ public class HudGameplayController : MonoBehaviour
 
     private ScenarioController _sceneController;
 
-    public void Initialize(ScenarioController manager)
+    public void Initialize(ScenarioController manager, Action onDown)
     {
         _sceneController = manager;
+        _onTapListener.Initialize(onDown);
         OnUnpause();
     }
 

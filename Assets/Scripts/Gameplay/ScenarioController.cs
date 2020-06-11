@@ -11,8 +11,8 @@ public class ScenarioController : MonoBehaviour
 
     private void Awake()
     {
-        _hud.Initialize(this);
         _character.Initialize();
+        _hud.Initialize(this, _character.OnTapDown);
     }
 
     public void TogglePause(bool toggle)

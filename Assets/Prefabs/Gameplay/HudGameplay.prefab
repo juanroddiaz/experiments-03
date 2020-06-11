@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2569366b300eec4ca74adf56380b494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onTapListener: {fileID: 1429164827}
   _controlsPanel: {fileID: 1306957592520041230}
   _pausePanel: {fileID: 3484288775447278305}
 --- !u!1 &777340278696151089

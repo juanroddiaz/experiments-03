@@ -8,13 +8,19 @@ public class CharacterManager : MonoBehaviour
     private CollisionEventLogic _footColliderLogic;
     [SerializeField]
     private CollisionEventLogic _frontColliderLogic;
+    [Header("Physics")]
     [SerializeField]
     private float _speed = 2.0f;
+    [SerializeField]
+    private float _jumpForce = 2.0f;
 
     public bool IsGrounded { get; private set; }
     public bool IsFacingWall { get; private set; }
+    public bool IsJumping { get; private set; }
 
     private Rigidbody2D _rigidbody2D;
+    private bool _mustJump = false;
+    private Vector2 _forceToApply = Vector2.zero;
 
     public void Initialize()
     {
@@ -37,6 +43,7 @@ public class CharacterManager : MonoBehaviour
     private void OnFootCollisionEnter(Transform t)
     {
         IsGrounded = true;
+        IsJumping = false;
     }
 
     private void OnFootCollisionExit(Transform t)
@@ -54,17 +61,47 @@ public class CharacterManager : MonoBehaviour
         IsFacingWall = false;
     }
 
-    private void FixedUpdate()
+    public void OnTapDown()
     {
-        if (!IsGrounded && IsFacingWall)
+        if(IsJumping)
         {
-            // if(mustJump)            
-            // else if speed Y axis = neg wall slide
+            return;
         }
 
-        if (IsGrounded && !IsFacingWall)
+        if (IsGrounded)
         {
-            _rigidbody2D.MovePosition(transform.position + transform.right * _speed * Time.fixedDeltaTime);
+            // simple jump
+            Debug.Log("Jump");
+            _mustJump = true;
+            return;
         }
+        else
+        {
+            if (IsFacingWall)
+            {
+                // rotate and jump
+                transform.right *= -1.0f;
+                _mustJump = true;
+            }
+        }        
+    }
+
+    private void FixedUpdate()
+    {
+        if ((IsGrounded || IsJumping) && !IsFacingWall)
+        {
+            var speed = _rigidbody2D.velocity;
+            speed.x = transform.right.x * _speed;
+            _rigidbody2D.velocity = speed;
+        }
+
+        if (_mustJump)
+        {
+            _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            IsJumping = true;
+        }
+
+        _mustJump = false;
+        _forceToApply = Vector2.zero;
     }
 }
