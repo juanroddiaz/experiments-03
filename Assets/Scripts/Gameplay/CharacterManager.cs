@@ -45,6 +45,13 @@ public class CharacterManager : MonoBehaviour
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log(other);
+        var coinLogic = other.transform.parent.GetComponent<CoinObjectLogic>();
+        coinLogic.OnCollected(0);
+    }
+
     private void OnFootCollisionEnter(Transform t)
     {
         IsGrounded = true;

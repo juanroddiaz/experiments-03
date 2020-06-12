@@ -17,8 +17,8 @@ TagManager:
   - Wall
   - FrontCollider
   - FootCollider
-  - 
-  - 
+  - Coin
+  - Character
   - 
   - 
   - 
