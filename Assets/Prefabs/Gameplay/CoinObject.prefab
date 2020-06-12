@@ -83,7 +83,7 @@ Transform:
   m_GameObject: {fileID: 6030079711553707350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.1, y: 0.1, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.5}
   m_Children: []
   m_Father: {fileID: 6876930526048396558}
   m_RootOrder: 1
@@ -126,7 +126,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 1331121607104604086, guid: 3abf3e66bcce21d4ab67ffefe1bcc3d5,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -227,6 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6876930526048396558}
   - component: {fileID: 43162120}
+  - component: {fileID: 4378044879608606552}
   m_Layer: 0
   m_Name: CoinObject
   m_TagString: Untagged
@@ -271,3 +273,22 @@ MonoBehaviour:
   _chestBonusPercentage: 10
   _chestSpawnCountdown: 5
   _chestSpriteObj: {fileID: 6514695581813853838}
+--- !u!95 &4378044879608606552
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6876930526048396559}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 39b7312f472960b45b2edd4fd62d4ee2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
