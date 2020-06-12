@@ -17,12 +17,20 @@ public class ScenarioController : MonoBehaviour
     private CoinObjectLogic _coinPrefab;
 
     private List<Vector3> _availableCells = new List<Vector3>();
+    private GameLevelData _levelData;
 
     private void Awake()
     {
         _character.Initialize();
         _hud.Initialize(this, _character.OnTapDown);
         InitializeTilemap();
+        // get level name
+        _levelData = new GameLevelData
+        {
+            Name = "TestLevel_01",
+            MaxCoins = 0
+        };
+        GameController.Instance.DataLoader.TrySaveLevelMaxCoins(_levelData);
     }
 
     private void InitializeTilemap()

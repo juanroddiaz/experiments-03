@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private static GameController Instance;
+    [SerializeField]
+    private GameDataLoader _dataLoader;
+
+    [SerializeField]
+    private List<string> _levelNames;
+
+    public static GameController Instance { get; private set; }
+
+    public GameDataLoader DataLoader => _dataLoader;
 
     private void Awake()
     {
@@ -16,5 +24,7 @@ public class GameController : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         Instance = this;
+
+        _dataLoader.Initialize(_levelNames);
     }
 }

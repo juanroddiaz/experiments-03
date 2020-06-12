@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 557154310284055200}
   - component: {fileID: 2100316341563913639}
   - component: {fileID: 557154310284055203}
+  - component: {fileID: 3647405880386817565}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -45,6 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87349b5a283c83d4f9482f164fe0d73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dataLoader: {fileID: 3647405880386817565}
+  _levelNames:
+  - TestLevel_01
 --- !u!114 &557154310284055203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +64,18 @@ MonoBehaviour:
   _gameplaySceneIdx: 1
   _mainMenuSceneIdx: 0
   _loadingOverlayObj: {fileID: 5234110049222333671}
+--- !u!114 &3647405880386817565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557154310284055202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c647d6ce2a6b74f9c5fb71ad36c192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &557154310715277193
 GameObject:
   m_ObjectHideFlags: 0
