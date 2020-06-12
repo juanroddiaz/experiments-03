@@ -8,6 +8,8 @@ public class CharacterManager : MonoBehaviour
     private CollisionEventLogic _footColliderLogic;
     [SerializeField]
     private CollisionEventLogic _frontColliderLogic;
+    [SerializeField]
+    private Collider2D _headBumperCollider;
     [Header("Physics")]
     [SerializeField]
     private float _moveSpeed = 3.5f;
@@ -88,7 +90,7 @@ public class CharacterManager : MonoBehaviour
     private void FixedUpdate()
     {
         var _speed = _rigidbody2D.velocity;
-        if ((IsGrounded || IsJumping) && !IsFacingWall)
+        if (!IsFacingWall)
         {
             _speed.x = transform.right.x * _moveSpeed;
         }
@@ -98,11 +100,13 @@ public class CharacterManager : MonoBehaviour
             //_rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
             _speed.y = _jumpSpeed;
             IsJumping = true;
+            _headBumperCollider.enabled = true;
         }
 
         if (IsJumping && _speed.y < 0.0f)
         {
             IsJumping = false;
+            _headBumperCollider.enabled = false;
             IsFalling = true;
         }
 

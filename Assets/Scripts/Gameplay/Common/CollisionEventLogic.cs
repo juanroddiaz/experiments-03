@@ -33,7 +33,7 @@ public class CollisionEventLogic : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("On trigger exit: other " + collision.gameObject.name + ", collider: " + gameObject.name);
+        Debug.Log("On collision exit: other " + collision.gameObject.name + ", collider: " + gameObject.name);
         if (_initialized)
         {
             _data.CollisionExitAction?.Invoke(collision.transform);
