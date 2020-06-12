@@ -54,6 +54,10 @@ public class CharacterManager : MonoBehaviour
     private void OnFootCollisionExit(Transform t)
     {
         IsGrounded = false;
+        if(!IsJumping)
+        {
+            IsFalling = true;
+        }
     }
 
     private void OnFrontCollisionEnter(Transform t)
