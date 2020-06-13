@@ -28,6 +28,16 @@ public class GameDataLoader : MonoBehaviour
         }
     }
 
+    public int GetLevelMaxCoins(string levelName)
+    {
+        var key = GameData.Find(k => string.Equals(k.Name, levelName));
+        if (key == null)
+        {
+            return 0;
+        }
+        return key.MaxCoins;
+    }
+
     public bool TrySaveLevelMaxCoins(GameLevelData data)
     {
         var key = GameData.Find(k => string.Equals(k.Name, data.Name));
