@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HudGameplayController : MonoBehaviour
@@ -13,14 +14,51 @@ public class HudGameplayController : MonoBehaviour
     private GameObject _controlsPanel;
     [SerializeField]
     private GameObject _pausePanel;
+    [SerializeField]
+    private GameObject _topPanel;
+    [SerializeField]
+    private GameObject _startLevelPanel;
+    [Header("Counters")]
+    [SerializeField]
+    private TextMeshProUGUI _timeCountdown;
+    [SerializeField]
+    private TextMeshProUGUI _coinsCounter;
+    [SerializeField]
+    private TextMeshProUGUI _startLevelCountdown;
 
     private ScenarioController _sceneController;
 
-    public void Initialize(ScenarioController manager, Action onDown)
+    public void Initialize(ScenarioController controller, Action onDown)
     {
-        _sceneController = manager;
+        _sceneController = controller;
         _onTapListener.Initialize(onDown);
-        OnUnpause();
+        OnStartLevel();
+    }
+
+    private void OnStartLevel()
+    {
+        _topPanel.SetActive(false);
+        _pausePanel.SetActive(false);
+        _controlsPanel.SetActive(false);
+        _startLevelPanel.SetActive(true);
+        StartCoroutine(StartLevelCountdown());
+    }
+
+    private IEnumerator StartLevelCountdown()
+    {
+        _startLevelCountdown.text = "3";
+        yield return new WaitForSeconds(1.0f);
+        _startLevelCountdown.text = "2";
+        yield return new WaitForSeconds(1.0f);
+        _startLevelCountdown.text = "1";
+        yield return new WaitForSeconds(1.0f);
+        _startLevelCountdown.text = "GO!";
+        yield return new WaitForSeconds(1.0f);
+        _controlsPanel.SetActive(true);
+        _startLevelPanel.SetActive(false);
+        _topPanel.SetActive(true);
+        _sceneController.StartLevel();
+        yield return null;
     }
 
     public void OnPause()
@@ -40,5 +78,21 @@ public class HudGameplayController : MonoBehaviour
     public void OnQuitGame()
     {
         _sceneController.OnQuit();
+    }
+
+    public void UpdateCoinCounter(int amount)
+    {
+        _coinsCounter.text = "x" + amount.ToString();
+    }
+
+    public void UpdateLevelCountdown(float countdown, bool levelFinished)
+    {
+        _timeCountdown.text = countdown.ToString("00.00");
+        if(levelFinished)
+        {
+            // todo: finish
+            OnPause();
+            _sceneController.FinishLevel();
+        }
     }
 }

@@ -27,8 +27,12 @@ public class CharacterManager : MonoBehaviour
     private bool _mustJump = false;
     private Vector2 _speed = Vector2.zero;
 
-    public void Initialize()
+    private ScenarioController _sceneController;
+
+    public void Initialize(ScenarioController controller)
     {
+        _sceneController = controller;
+
         var footData = new CollisionEventData
         {
             CollisionEnterAction = OnFootCollisionEnter,
@@ -48,8 +52,16 @@ public class CharacterManager : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other);
-        var coinLogic = other.transform.parent.GetComponent<CoinObjectLogic>();
-        coinLogic.OnCollected(0);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Coin"))
+        {
+            OnCoinCollected(other.transform.parent.GetComponent<CoinObjectLogic>());
+        }
+    }
+
+    private void OnCoinCollected(CoinObjectLogic coinLogic)
+    {
+        var coinsCollected = coinLogic.OnCollected(_sceneController.LevelCoins);
+        _sceneController.OnCoinCollected(coinsCollected);
     }
 
     private void OnFootCollisionEnter(Transform t)
@@ -79,6 +91,11 @@ public class CharacterManager : MonoBehaviour
 
     public void OnTapDown()
     {
+        if (!_sceneController.LevelStarted)
+        {
+            return;
+        }
+
         if (IsGrounded)
         {
             // simple jump
@@ -100,6 +117,11 @@ public class CharacterManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!_sceneController.LevelStarted)
+        {
+            return;
+        }
+
         var _speed = _rigidbody2D.velocity;
         if (!IsFacingWall)
         {
