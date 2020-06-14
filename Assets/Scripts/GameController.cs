@@ -6,11 +6,14 @@ public class GameController : MonoBehaviour
 {
     [SerializeField]
     private GameDataLoader _dataLoader;
+    [SerializeField]
+    private SceneLoader _sceneLoader;
 
     [SerializeField]
     private List<string> _levelNames;
 
     public static GameController Instance { get; private set; }
+    public SceneLoader SceneLoader { get { return _sceneLoader; } }
 
     public GameDataLoader DataLoader => _dataLoader;
 
@@ -26,5 +29,6 @@ public class GameController : MonoBehaviour
         Instance = this;
 
         _dataLoader.Initialize(_levelNames);
+        _sceneLoader.Initialize();
     }
 }

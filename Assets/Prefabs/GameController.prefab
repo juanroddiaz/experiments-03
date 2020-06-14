@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dataLoader: {fileID: 3647405880386817565}
+  _sceneLoader: {fileID: 557154310284055203}
   _levelNames:
   - TestLevel_01
 --- !u!114 &557154310284055203

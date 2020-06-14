@@ -38,9 +38,10 @@ public class ScenarioController : MonoBehaviour
             Name = "TestLevel_01",
             MaxCoins = 0
         };
-        int levelMaxCoins = GameController.Instance.DataLoader.GetLevelMaxCoins(_levelData.Name);
-        Debug.Log("Level " + _levelData.Name + " max coins: " + levelMaxCoins.ToString());
+        _levelData.MaxCoins = GameController.Instance.DataLoader.GetLevelMaxCoins(_levelData.Name);
+        Debug.Log("Level " + _levelData.Name + " max coins: " + _levelData.MaxCoins.ToString());
         CurrentLevelTime = _levelTotalTime;
+        TogglePause(false);
         LevelStarted = false;
     }
 
@@ -79,8 +80,20 @@ public class ScenarioController : MonoBehaviour
 
     public void FinishLevel()
     {
-        _levelData.MaxCoins = LevelCoins;
-        GameController.Instance.DataLoader.TrySaveLevelMaxCoins(_levelData);
+        TogglePause(true);
+        if (GameController.Instance.DataLoader.TrySaveLevelMaxCoins(new GameLevelData
+        {
+            Name = _levelData.Name,
+            MaxCoins = LevelCoins
+        }))
+        {
+            _levelData.MaxCoins = LevelCoins;
+        }
+    }
+
+    public int GetMaxLevelCoins()
+    {
+        return _levelData.MaxCoins;
     }
 
     public void TogglePause(bool toggle)

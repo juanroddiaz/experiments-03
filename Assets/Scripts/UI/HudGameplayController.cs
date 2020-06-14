@@ -18,6 +18,8 @@ public class HudGameplayController : MonoBehaviour
     private GameObject _topPanel;
     [SerializeField]
     private GameObject _startLevelPanel;
+    [SerializeField]
+    private GameObject _endLevelPanel;
     [Header("Counters")]
     [SerializeField]
     private TextMeshProUGUI _timeCountdown;
@@ -25,6 +27,10 @@ public class HudGameplayController : MonoBehaviour
     private TextMeshProUGUI _coinsCounter;
     [SerializeField]
     private TextMeshProUGUI _startLevelCountdown;
+    [SerializeField]
+    private TextMeshProUGUI _endLevelCoinsCounter;
+    [SerializeField]
+    private TextMeshProUGUI _endLevelMaxCoinsCounter;
 
     private ScenarioController _sceneController;
 
@@ -40,6 +46,7 @@ public class HudGameplayController : MonoBehaviour
         _topPanel.SetActive(false);
         _pausePanel.SetActive(false);
         _controlsPanel.SetActive(false);
+        _endLevelPanel.SetActive(false);
         _startLevelPanel.SetActive(true);
         StartCoroutine(StartLevelCountdown());
     }
@@ -75,6 +82,16 @@ public class HudGameplayController : MonoBehaviour
         _controlsPanel.SetActive(true);
     }
 
+    public void OnReplay()
+    {
+        GameController.Instance.SceneLoader.ReloadScene();
+    }
+
+    public void OnBackToMainMenu()
+    {
+        GameController.Instance.SceneLoader.LoadMainMenu();
+    }
+
     public void OnQuitGame()
     {
         _sceneController.OnQuit();
@@ -90,9 +107,18 @@ public class HudGameplayController : MonoBehaviour
         _timeCountdown.text = countdown.ToString("00.00");
         if(levelFinished)
         {
-            // todo: finish
-            OnPause();
-            _sceneController.FinishLevel();
+            OnFinishLevel();
         }
+    }
+
+    private void OnFinishLevel()
+    {
+        _topPanel.SetActive(false);
+        _pausePanel.SetActive(false);
+        _controlsPanel.SetActive(false);
+        _endLevelPanel.SetActive(true);
+        _sceneController.FinishLevel();
+        _endLevelCoinsCounter.text = _sceneController.LevelCoins.ToString();
+        _endLevelMaxCoinsCounter.text = _sceneController.GetMaxLevelCoins().ToString();
     }
 }
