@@ -268,6 +268,8 @@ MonoBehaviour:
   _randomSpawnMinTime: 4
   _randomSpawnMaxTime: 8
   _collider: {fileID: 8450649521841087729}
+  _feedbackObj: {fileID: 6676332536221862699, guid: 902f4e914382c6f4e852f550b96d4dde,
+    type: 3}
   _coinSpriteObj: {fileID: 6030079711553707350}
   _chestChancePercentage: 2
   _chestBonusPercentage: 10

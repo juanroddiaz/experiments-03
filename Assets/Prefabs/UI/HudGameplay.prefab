@@ -236,6 +236,7 @@ MonoBehaviour:
   _startLevelCountdown: {fileID: 236004902257448392}
   _endLevelCoinsCounter: {fileID: 7860379054178215982}
   _endLevelMaxCoinsCounter: {fileID: 601012744651150583}
+  _coinTarget: {fileID: 5668493755839747825}
 --- !u!1 &777340278696151089
 GameObject:
   m_ObjectHideFlags: 0

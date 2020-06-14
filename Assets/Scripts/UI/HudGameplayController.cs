@@ -31,6 +31,8 @@ public class HudGameplayController : MonoBehaviour
     private TextMeshProUGUI _endLevelCoinsCounter;
     [SerializeField]
     private TextMeshProUGUI _endLevelMaxCoinsCounter;
+    [SerializeField]
+    private Transform _coinTarget;
 
     private ScenarioController _sceneController;
 
@@ -66,6 +68,11 @@ public class HudGameplayController : MonoBehaviour
         _topPanel.SetActive(true);
         _sceneController.StartLevel();
         yield return null;
+    }
+
+    public Transform GetCoinHudTargetTransform()
+    {
+        return _coinTarget;
     }
 
     public void OnPause()

@@ -74,6 +74,7 @@ public class ScenarioController : MonoBehaviour
                     var emptyCellObj = Instantiate(_coinPrefab, _emptyCellsParent);
                     emptyCellObj.name = "cell_" + n.ToString() + "_" + p.ToString();
                     emptyCellObj.transform.position = place;
+                    emptyCellObj.GetComponent<CoinObjectLogic>().Initialize(_hud.GetCoinHudTargetTransform());
                 }
             }
         }

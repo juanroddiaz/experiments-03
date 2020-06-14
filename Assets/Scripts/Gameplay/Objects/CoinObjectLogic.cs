@@ -16,6 +16,8 @@ public class CoinObjectLogic : MonoBehaviour
     private float _randomSpawnMaxTime = 5.0f;
     [SerializeField]
     private Collider2D _collider;
+    [SerializeField]
+    private LootRewardFeedback _feedbackObj;
     [Header("Coins")]
     [SerializeField]
     private GameObject _coinSpriteObj;
@@ -31,6 +33,7 @@ public class CoinObjectLogic : MonoBehaviour
 
     private CoinObjectState _state;
     private GameObject _currentSpriteObj;
+    private Transform _hudCoinTarget;
 
     private void Awake()
     {
@@ -38,6 +41,11 @@ public class CoinObjectLogic : MonoBehaviour
         _currentSpriteObj = _coinSpriteObj;
         _coinSpriteObj.SetActive(true);
         _chestSpriteObj.SetActive(false);
+    }
+
+    public void Initialize(Transform hudCoinTarget)
+    {
+        _hudCoinTarget = hudCoinTarget;
     }
 
     public int OnCollected(int currentCoins)
@@ -55,8 +63,25 @@ public class CoinObjectLogic : MonoBehaviour
         _currentSpriteObj.SetActive(false);
         _collider.enabled = false;
         // collect FX
+        GenerateRewardVfx();
         StartCoroutine(Respawn());
         return ret;
+    }
+
+    private void GenerateRewardVfx()
+    {
+        var rewardGo = Instantiate(_feedbackObj);
+        LootRewardFeedback feedback = rewardGo.GetComponent<LootRewardFeedback>();
+        var targetPosition = _hudCoinTarget.position;
+        targetPosition.z = -Camera.main.transform.position.z;
+        var data = new LootRewardFeedbackData
+        {
+            StartTransform = _currentSpriteObj.transform,
+            TargetPosition = Camera.main.ScreenToWorldPoint(targetPosition),
+            OnFeedbackStarts = null,
+            OnFeedbackReachedEnd = null
+        };
+        feedback.Init(data);
     }
 
     private IEnumerator Respawn()
