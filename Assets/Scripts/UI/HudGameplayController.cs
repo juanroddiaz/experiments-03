@@ -118,7 +118,7 @@ public class HudGameplayController : MonoBehaviour
         _controlsPanel.SetActive(false);
         _endLevelPanel.SetActive(true);
         _sceneController.FinishLevel();
-        _endLevelCoinsCounter.text = _sceneController.LevelCoins.ToString();
-        _endLevelMaxCoinsCounter.text = _sceneController.GetMaxLevelCoins().ToString();
+        _endLevelCoinsCounter.text = "x" + _sceneController.LevelCoins.ToString();
+        _endLevelMaxCoinsCounter.text = "x" + _sceneController.GetMaxLevelCoins().ToString();
     }
 }
