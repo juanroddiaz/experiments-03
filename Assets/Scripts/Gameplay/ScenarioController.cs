@@ -19,6 +19,8 @@ public class ScenarioController : MonoBehaviour
     private float _levelTotalTime = 20.0f;
     [SerializeField]
     private Vector2 _characterInitialPosition;
+    [SerializeField]
+    private Vector3 _levelLocalPosition = new Vector3(-1.0f, 0.0f, 0.0f);
 
     private List<Vector3> _availableCells = new List<Vector3>();
     private GameLevelData _levelData;
@@ -31,15 +33,19 @@ public class ScenarioController : MonoBehaviour
     {
         _character.Initialize(this);
         _hud.Initialize(this, _character.OnTapDown);
-        InitializeTilemap();
-        // get level name
+        // level init
+        LevelData levelEntry = GameController.Instance.GetSelectedLevelData();
         _levelData = new GameLevelData
         {
-            Name = "TestLevel_01",
+            Name = levelEntry.Name,
             MaxCoins = 0
         };
-        _levelData.MaxCoins = GameController.Instance.DataLoader.GetLevelMaxCoins(_levelData.Name);
+        _levelData.MaxCoins = GameController.Instance.DataLoader.GetLevelMaxCoins(levelEntry.Name);
         Debug.Log("Level " + _levelData.Name + " max coins: " + _levelData.MaxCoins.ToString());
+
+        var levelObj = GameObject.Instantiate(levelEntry.GamePrefab, _tilemapGrid.transform);
+        levelObj.transform.localPosition = _levelLocalPosition;
+        InitializeTilemap();
         CurrentLevelTime = _levelTotalTime;
         TogglePause(false);
         LevelStarted = false;
