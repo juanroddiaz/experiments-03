@@ -48,8 +48,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataLoader: {fileID: 3647405880386817565}
   _sceneLoader: {fileID: 557154310284055203}
-  _levelNames:
-  - TestLevel_01
+  _levelData:
+  - Name: CAVE MAZE
+    GamePrefab: {fileID: 5809674223240184577, guid: 4d9fef59f4abd034091ed3e3a868dfd8,
+      type: 3}
+    MenuImage: {fileID: 0}
+  - Name: ANOTHER CAVE MAZE
+    GamePrefab: {fileID: 5809674223240184577, guid: 4d9fef59f4abd034091ed3e3a868dfd8,
+      type: 3}
+    MenuImage: {fileID: 0}
+  SelectedLevelIdx: 0
 --- !u!114 &557154310284055203
 MonoBehaviour:
   m_ObjectHideFlags: 0

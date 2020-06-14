@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class LevelData
+{
+    public string Name;
+    public GameObject GamePrefab;
+    public Sprite MenuImage;
+}
+
 public class GameController : MonoBehaviour
 {
     [SerializeField]
@@ -10,12 +18,12 @@ public class GameController : MonoBehaviour
     private SceneLoader _sceneLoader;
 
     [SerializeField]
-    private List<string> _levelNames;
+    private List<LevelData> _levelData;
 
     public static GameController Instance { get; private set; }
     public SceneLoader SceneLoader { get { return _sceneLoader; } }
-
     public GameDataLoader DataLoader => _dataLoader;
+    public int SelectedLevelIdx = 0;
 
     private void Awake()
     {
@@ -28,7 +36,48 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Instance = this;
 
-        _dataLoader.Initialize(_levelNames);
+        _dataLoader.Initialize(GetAllLevelNames());
         _sceneLoader.Initialize();
+    }
+
+    private List<string> GetAllLevelNames()
+    {
+        var list = new List<string>();
+        foreach (var entry in _levelData)
+        {
+            list.Add(entry.Name);
+        }
+        return list;
+    }
+
+    public List<Sprite> GetMenuLevelSprites()
+    {
+        var list = new List<Sprite>();
+        foreach (var entry in _levelData)
+        {
+            list.Add(entry.MenuImage);
+        }
+        return list;
+    }
+
+    public string GetLevelNameByIdx(int idx)
+    {
+        if (idx >= 0 && idx < _levelData.Count)
+        {
+            return _levelData[idx].Name;
+        }
+        Debug.LogError("Wrong index for level name!");
+        return "???";
+    }
+
+    public void LoadGameplayScenario(int carouselIndex)
+    {
+        SelectedLevelIdx = carouselIndex;
+        _sceneLoader.LoadGameplayScene();
+    }
+
+    public LevelData GetSelectedLevelData()
+    {
+        return _levelData[SelectedLevelIdx];
     }
 }
