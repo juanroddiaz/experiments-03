@@ -18,6 +18,8 @@ public class CoinObjectLogic : MonoBehaviour
     private Collider2D _collider;
     [SerializeField]
     private LootRewardFeedback _feedbackObj;
+    [SerializeField]
+    private Animator _animator;
     [Header("Coins")]
     [SerializeField]
     private GameObject _coinSpriteObj;
@@ -35,17 +37,21 @@ public class CoinObjectLogic : MonoBehaviour
     private GameObject _currentSpriteObj;
     private Transform _hudCoinTarget;
 
-    private void Awake()
-    {
-        _state = CoinObjectState.Coin;
-        _currentSpriteObj = _coinSpriteObj;
-        _coinSpriteObj.SetActive(true);
-        _chestSpriteObj.SetActive(false);
-    }
-
     public void Initialize(Transform hudCoinTarget)
     {
+        SetState(CoinObjectState.Coin);
         _hudCoinTarget = hudCoinTarget;
+    }
+
+    private void SetState(CoinObjectState state)
+    {
+        _state = state;
+        var isCoin = state == CoinObjectState.Coin;
+        _animator.SetBool("Coin", isCoin);
+        _coinSpriteObj.SetActive(isCoin);
+        _animator.SetBool("Chest", !isCoin);
+        _chestSpriteObj.SetActive(!isCoin);
+        _currentSpriteObj = isCoin ? _coinSpriteObj : _chestSpriteObj;
     }
 
     public int OnCollected(int currentCoins)
@@ -57,15 +63,26 @@ public class CoinObjectLogic : MonoBehaviour
                 ret = 1;
                 break;
             case CoinObjectState.Chest:
-                ret = Mathf.CeilToInt(currentCoins * (1.0f + _chestBonusPercentage / 100.0f));
+                StopCoroutine(RunChestCountdown());
+                ret = Mathf.CeilToInt(currentCoins * (_chestBonusPercentage / 100.0f));
+                SetState(CoinObjectState.Coin);
                 break;
         }
-        _currentSpriteObj.SetActive(false);
         _collider.enabled = false;
-        // collect FX
+        UpdateState();
         GenerateRewardVfx();
         StartCoroutine(Respawn());
         return ret;
+    }
+
+    private void UpdateState()
+    {
+        _currentSpriteObj.SetActive(false);
+        var chestChance = Random.Range(0.0f, 100.0f);
+        var isChest = chestChance <= _chestChancePercentage;
+        var newState = isChest ? CoinObjectState.Chest : CoinObjectState.Coin;
+        SetState(newState);
+        _currentSpriteObj.SetActive(false);
     }
 
     private void GenerateRewardVfx()
@@ -90,6 +107,16 @@ public class CoinObjectLogic : MonoBehaviour
         yield return new WaitForSeconds(countdown);
         _currentSpriteObj.SetActive(true);
         _collider.enabled = true;
+        if (_state == CoinObjectState.Chest)
+        {
+            StartCoroutine(RunChestCountdown());
+        }
         yield return null;
+    }
+
+    private IEnumerator RunChestCountdown()
+    {
+        yield return new WaitForSeconds(_chestSpawnCountdown);
+        SetState(CoinObjectState.Coin);
     }
 }

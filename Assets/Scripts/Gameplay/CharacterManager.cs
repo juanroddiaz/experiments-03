@@ -51,15 +51,16 @@ public class CharacterManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other);
         if (other.gameObject.layer == LayerMask.NameToLayer("Coin"))
         {
+            Debug.Log(other);
             OnCoinCollected(other.transform.parent.GetComponent<CoinObjectLogic>());
         }
     }
 
     private void OnCoinCollected(CoinObjectLogic coinLogic)
     {
+        //Debug.Log(coinLogic.gameObject.name);
         var coinsCollected = coinLogic.OnCollected(_sceneController.LevelCoins);
         _sceneController.OnCoinCollected(coinsCollected);
     }
