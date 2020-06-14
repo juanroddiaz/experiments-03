@@ -33,6 +33,7 @@ public class GameDataLoader : MonoBehaviour
         var key = GameData.Find(k => string.Equals(k.Name, levelName));
         if (key == null)
         {
+            Debug.Log("No data for level " + levelName);
             return 0;
         }
         return key.MaxCoins;

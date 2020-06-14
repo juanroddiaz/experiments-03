@@ -16,6 +16,8 @@ public class CarouselSelectorLogic : MonoBehaviour
     private Image _rightArrowImage;
     [SerializeField]
     private Image _leftArrowImage;
+    [SerializeField]
+    private TextMeshProUGUI _bestCoinsCounter;
     [Header("Custom Thresholds")]
     [SerializeField]
     private float _imageSeparationFactor = 1.0f;
@@ -211,7 +213,9 @@ public class CarouselSelectorLogic : MonoBehaviour
 
     private void UpdateWorldInfo()
     {
-        _title.text = GameController.Instance.GetLevelNameByIdx(CurrentIndex);
+        string levelName = GameController.Instance.GetLevelNameByIdx(CurrentIndex);
+        _title.text = levelName;
+        _bestCoinsCounter.text = GameController.Instance.DataLoader.GetLevelMaxCoins(levelName).ToString();
         _rightArrowImage.enabled = CurrentIndex != (_images.Count - 1);
         _leftArrowImage.enabled = CurrentIndex != 0;
     }
