@@ -104,6 +104,7 @@ public class HudGameplayController : MonoBehaviour
 
     public void OnBackToMainMenu()
     {
+        _sceneController.TogglePause(false);
         GameController.Instance.SceneLoader.LoadMainMenu();
     }
 
