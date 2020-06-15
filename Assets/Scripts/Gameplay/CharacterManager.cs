@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharacterManager : MonoBehaviour
 {
     [SerializeField]
+    private Animator _animator;
+    [SerializeField]
     private CollisionEventLogic _footColliderLogic;
     [SerializeField]
     private CollisionEventLogic _frontColliderLogic;
@@ -28,6 +30,11 @@ public class CharacterManager : MonoBehaviour
     private Vector2 _speed = Vector2.zero;
 
     private ScenarioController _sceneController;
+    private static string _groundedAnimKey = "Grounded";
+    private static string _runAnimKey = "Run";
+    private static string _jumpAnimKey = "Jump";
+    private static string _wallSlideAnimKey = "WallSlide";
+    private static string _fallAnimKey = "Fall";
 
     public void Initialize(ScenarioController controller)
     {
@@ -47,6 +54,11 @@ public class CharacterManager : MonoBehaviour
         _frontColliderLogic.Initialize(frontData);
 
         _rigidbody2D = GetComponent<Rigidbody2D>();
+    }
+
+    public void StartLevel()
+    {
+        _animator.SetBool(_groundedAnimKey, true);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -74,7 +86,7 @@ public class CharacterManager : MonoBehaviour
     private void OnFootCollisionExit(Transform t)
     {
         IsGrounded = false;
-        if(!IsJumping)
+        if (!IsJumping)
         {
             IsFalling = true;
         }
@@ -135,6 +147,7 @@ public class CharacterManager : MonoBehaviour
             _speed.y = _jumpSpeed;
             IsJumping = true;
             _headBumperCollider.enabled = true;
+            _animator.SetBool(_jumpAnimKey, true);
         }
 
         if (IsJumping && _speed.y < 0.0f)
@@ -146,10 +159,21 @@ public class CharacterManager : MonoBehaviour
 
         if (IsFalling && IsFacingWall)
         {
-            _speed.y = _wallSlideSpeed;
+            _speed.y = _wallSlideSpeed;            
         }
+
+        SetAnimations(!IsFacingWall, IsJumping, IsFalling && IsFacingWall, IsFalling);
 
         _mustJump = false;
         _rigidbody2D.velocity = _speed;
+    }
+
+    private void SetAnimations(bool run, bool jump, bool wallSlide, bool falling)
+    {
+        _animator.SetBool(_jumpAnimKey, jump);
+        _animator.SetBool(_wallSlideAnimKey, wallSlide);
+        _animator.SetBool(_fallAnimKey, falling);
+        _animator.SetBool(_groundedAnimKey, IsGrounded);
+        _animator.SetBool(_runAnimKey, run);        
     }
 }

@@ -83,6 +83,7 @@ public class ScenarioController : MonoBehaviour
     public void StartLevel()
     {
         LevelStarted = true;
+        _character.StartLevel();
     }
 
     public void FinishLevel()
