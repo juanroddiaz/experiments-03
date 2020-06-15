@@ -170,7 +170,7 @@ MonoBehaviour:
   _tilemapGrid: {fileID: 1739777301}
   _emptyCellsParent: {fileID: 840428178}
   _coinPrefab: {fileID: 43162120, guid: 867d98c2dc85ca34c9010d4d8447e767, type: 3}
-  _levelTotalTime: 30
+  _levelTotalTime: 5
   _characterInitialPosition: {x: -8, y: -3}
   _levelLocalPosition: {x: -1, y: 0, z: 0}
 --- !u!1001 &7081309
@@ -600,6 +600,11 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2638411000653027264, guid: e5374238b59ed8745b114d54009b1d0b,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
     - target: {fileID: 2692041275875645603, guid: e5374238b59ed8745b114d54009b1d0b,
         type: 3}
       propertyPath: m_ChildControlHeight
@@ -630,6 +635,11 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2805023700855509988, guid: e5374238b59ed8745b114d54009b1d0b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3057505096464898526, guid: e5374238b59ed8745b114d54009b1d0b,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -659,6 +669,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3081479952503406988, guid: e5374238b59ed8745b114d54009b1d0b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3332362571357366876, guid: e5374238b59ed8745b114d54009b1d0b,
         type: 3}
@@ -704,6 +719,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.spaceCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883088619679277389, guid: e5374238b59ed8745b114d54009b1d0b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4303561019601143459, guid: e5374238b59ed8745b114d54009b1d0b,
         type: 3}
@@ -916,6 +936,16 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6321526771521767483, guid: e5374238b59ed8745b114d54009b1d0b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321526771521767483, guid: e5374238b59ed8745b114d54009b1d0b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6741963665216632376, guid: e5374238b59ed8745b114d54009b1d0b,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1075,6 +1105,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833909063037953182, guid: e5374238b59ed8745b114d54009b1d0b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833909063037953182, guid: e5374238b59ed8745b114d54009b1d0b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7860379054178215982, guid: e5374238b59ed8745b114d54009b1d0b,
         type: 3}
@@ -1286,9 +1326,15 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9170248441602324269, guid: e5374238b59ed8745b114d54009b1d0b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5210773519371069056, guid: e5374238b59ed8745b114d54009b1d0b, type: 3}
     - {fileID: 3365866806521280649, guid: e5374238b59ed8745b114d54009b1d0b, type: 3}
+    - {fileID: 6709261834585594577, guid: e5374238b59ed8745b114d54009b1d0b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e5374238b59ed8745b114d54009b1d0b, type: 3}
 --- !u!114 &154889330 stripped
 MonoBehaviour:
