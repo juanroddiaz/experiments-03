@@ -174,6 +174,6 @@ public class CharacterManager : MonoBehaviour
         _animator.SetBool(_wallSlideAnimKey, wallSlide);
         _animator.SetBool(_fallAnimKey, falling);
         _animator.SetBool(_groundedAnimKey, IsGrounded);
-        _animator.SetBool(_runAnimKey, run);        
+        _animator.SetBool(_runAnimKey, run && IsGrounded);        
     }
 }
