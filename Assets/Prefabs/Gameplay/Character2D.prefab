@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1662287353879820324}
   - component: {fileID: 1662287353879820325}
   - component: {fileID: 1662287353879820327}
+  - component: {fileID: 226327014290367911}
   m_Layer: 13
   m_Name: Character2D
   m_TagString: Untagged
@@ -151,6 +152,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.15, y: 0.13}
   m_EdgeRadius: 0
+--- !u!114 &226327014290367911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662287353879820322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a957e37da95464baa8067fc6756f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startScale: {x: 7.5, y: 7.5}
+  _endScale: {x: 1, y: 1}
+  _trailLifetime: 0.75
+  _spawnType: 1
+  _timeBetweenTrailSpawn: 0.1
+  _distanceBetweenTrailSpawn: 0.2
+  _alphaUpdateOn: 1
+  _maxAlpha: 1
+  _minAlpha: 0
+  _useSolidColors: 1
+  _rainbowMode: 1
+  _userSelectedColorPalette: []
 --- !u!1 &1662287354625546602
 GameObject:
   m_ObjectHideFlags: 0
