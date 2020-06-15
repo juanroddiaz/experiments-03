@@ -64,9 +64,10 @@ MonoBehaviour:
   _leftArrowImage: {fileID: 6827470665078715169}
   _bestCoinsCounter: {fileID: 8670268512502144524}
   _imageSeparationFactor: 0.5
-  _imageGap: 25
+  _imageGap: 50
   _swipeThrustHold: 30
   CurrentIndex: 0
+  _initialized: 0
 --- !u!222 &746009091198365672
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480880567300924465}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

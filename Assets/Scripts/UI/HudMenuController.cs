@@ -10,6 +10,11 @@ public class HudMenuController : MonoBehaviour
     [SerializeField]
     private Button _playButton;
 
+    void Start()
+    {
+        _carouselLogic.Initialize();
+    }
+
     public void OnPlayButtonClick()
     {
         GameController.Instance.LoadGameplayScenario(_carouselLogic.CurrentIndex);

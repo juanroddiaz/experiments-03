@@ -36,12 +36,13 @@ public class CarouselSelectorLogic : MonoBehaviour
     private float _dragAmount = 0.0f;
     private float _screenPositionX;
     private float _lastScreenPositionX;
+    private bool _initialized = false;
 
     /// The index of the current image on display.
     public int CurrentIndex = 0;
 
     // Use this for initialization
-    void Start()
+    public void Initialize()
     {
         _canSwipe = false;
         _imageWitdh = _viewWindows.rect.width * _imageSeparationFactor * Screen.height / Screen.width;
@@ -65,6 +66,7 @@ public class CarouselSelectorLogic : MonoBehaviour
 
         CurrentIndex = GameController.Instance.SelectedLevelIdx;
         GoToIndex(CurrentIndex);
+        _initialized = true;
     }
 
     private void SwipeDetection()
@@ -108,6 +110,11 @@ public class CarouselSelectorLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_initialized)
+        {
+            return;
+        }
+
         _lerpTimer = _lerpTimer + Time.deltaTime;
 
         if (_lerpTimer < 0.333f)
@@ -199,6 +206,12 @@ public class CarouselSelectorLogic : MonoBehaviour
 
     public void GoToIndex(int value)
     {
+        if(value < 0 || value >= _images.Count)
+        {
+            Debug.LogError("Invalid index for carousel! " + value.ToString());
+            value = 0;
+        }
+
         CurrentIndex = value;
         _lerpTimer = 0;
         _lerpPosition = (_imageWitdh + _imageGap) * CurrentIndex;
