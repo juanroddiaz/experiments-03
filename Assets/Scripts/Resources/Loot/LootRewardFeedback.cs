@@ -22,8 +22,9 @@ public class LootRewardFeedbackData
 {
     public Transform StartTransform;
     public Vector3 TargetPosition;
-    public Action<Transform> OnFeedbackStarts;
-    public Action<Transform> OnFeedbackReachedEnd;
+    public Action OnFeedbackStarts;
+    public Action<int> OnFeedbackReachedEnd;
+    public int Amount;
 }
 
 public class LootRewardFeedback : MonoBehaviour
@@ -41,11 +42,12 @@ public class LootRewardFeedback : MonoBehaviour
     [SerializeField]
     private Vector3 _beforeMovingScale = Vector3.one;
 
-    private Action<Transform> _onFeedbackStarts;
-    private Action<Transform> _onFeedbackReachedEnd;
+    private Action _onFeedbackStarts;
+    private Action<int> _onFeedbackReachedEnd;
 
     private LootRewardFeedbackState _state = LootRewardFeedbackState.None;
     private Vector3 _targetPosition;
+    private int _amount;
 
     public void Init(LootRewardFeedbackData data)
     {
@@ -53,8 +55,9 @@ public class LootRewardFeedback : MonoBehaviour
         transform.localScale = _initialScale;
         _targetPosition = data.TargetPosition;
         _onFeedbackStarts = data.OnFeedbackStarts;
-        _onFeedbackStarts?.Invoke(transform);
+        _onFeedbackStarts?.Invoke();
         _onFeedbackReachedEnd = data.OnFeedbackReachedEnd;
+        _amount = data.Amount;
         _state = LootRewardFeedbackState.Spawning;
     }
 
@@ -76,7 +79,7 @@ public class LootRewardFeedback : MonoBehaviour
                 if(Vector3.Distance(transform.position, _targetPosition) < _moveReachingDistance)
                 {
                     _state = LootRewardFeedbackState.Dissapearing;
-                    _onFeedbackReachedEnd?.Invoke(transform);
+                    _onFeedbackReachedEnd?.Invoke(_amount);
                 }
                 break;
             case LootRewardFeedbackState.Dissapearing:

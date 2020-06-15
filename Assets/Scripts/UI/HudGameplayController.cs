@@ -33,8 +33,13 @@ public class HudGameplayController : MonoBehaviour
     private TextMeshProUGUI _endLevelMaxCoinsCounter;
     [SerializeField]
     private Transform _coinTarget;
+    [SerializeField]
+    private TextMeshProUGUI _extraCoinsCounter;
+    [SerializeField]
+    private Animation _extraCoinsAnimation;
 
     private ScenarioController _sceneController;
+    private int _coinCounterVisualAmount = 0;
 
     public void Initialize(ScenarioController controller, Action onDown)
     {
@@ -50,6 +55,7 @@ public class HudGameplayController : MonoBehaviour
         _controlsPanel.SetActive(false);
         _endLevelPanel.SetActive(false);
         _startLevelPanel.SetActive(true);
+        _extraCoinsCounter.gameObject.SetActive(false);
         StartCoroutine(StartLevelCountdown());
     }
 
@@ -104,9 +110,16 @@ public class HudGameplayController : MonoBehaviour
         _sceneController.OnQuit();
     }
 
-    public void UpdateCoinCounter(int amount)
+    public void UpdateCoinCounter(int add)
     {
-        _coinsCounter.text = "x" + amount.ToString();
+        _coinCounterVisualAmount += add;
+        _coinsCounter.text = "x" + _coinCounterVisualAmount.ToString();
+        if (add > 1)
+        {
+            _extraCoinsCounter.text = "+" + add.ToString();
+            _extraCoinsCounter.gameObject.SetActive(true);
+            _extraCoinsAnimation.Play();
+        }
     }
 
     public void UpdateLevelCountdown(float countdown, bool levelFinished)

@@ -36,11 +36,13 @@ public class CoinObjectLogic : MonoBehaviour
     private CoinObjectState _state;
     private GameObject _currentSpriteObj;
     private Transform _hudCoinTarget;
+    private HudGameplayController _hudGameplayController;
 
-    public void Initialize(Transform hudCoinTarget)
+    public void Initialize(HudGameplayController hudGameplay)
     {
         SetState(CoinObjectState.Coin);
-        _hudCoinTarget = hudCoinTarget;
+        _hudGameplayController = hudGameplay;
+        _hudCoinTarget = hudGameplay.GetCoinHudTargetTransform();
     }
 
     private void SetState(CoinObjectState state)
@@ -70,7 +72,7 @@ public class CoinObjectLogic : MonoBehaviour
         }
         _collider.enabled = false;
         UpdateState();
-        GenerateRewardVfx();
+        GenerateRewardVfx(ret);
         StartCoroutine(Respawn());
         return ret;
     }
@@ -85,7 +87,7 @@ public class CoinObjectLogic : MonoBehaviour
         _currentSpriteObj.SetActive(false);
     }
 
-    private void GenerateRewardVfx()
+    private void GenerateRewardVfx(int amount)
     {
         var rewardGo = Instantiate(_feedbackObj);
         LootRewardFeedback feedback = rewardGo.GetComponent<LootRewardFeedback>();
@@ -96,7 +98,8 @@ public class CoinObjectLogic : MonoBehaviour
             StartTransform = _currentSpriteObj.transform,
             TargetPosition = Camera.main.ScreenToWorldPoint(targetPosition),
             OnFeedbackStarts = null,
-            OnFeedbackReachedEnd = null
+            OnFeedbackReachedEnd = _hudGameplayController.UpdateCoinCounter,
+            Amount = amount
         };
         feedback.Init(data);
     }
