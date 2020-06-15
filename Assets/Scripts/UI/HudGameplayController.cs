@@ -20,6 +20,8 @@ public class HudGameplayController : MonoBehaviour
     private GameObject _startLevelPanel;
     [SerializeField]
     private GameObject _endLevelPanel;
+    [SerializeField]
+    private GameObject _gameplayPanel;
     [Header("Counters")]
     [SerializeField]
     private TextMeshProUGUI _timeCountdown;
@@ -140,5 +142,10 @@ public class HudGameplayController : MonoBehaviour
         _sceneController.FinishLevel();
         _endLevelCoinsCounter.text = "x" + _sceneController.LevelCoins.ToString();
         _endLevelMaxCoinsCounter.text = "x" + _sceneController.GetMaxLevelCoins().ToString();
+    }
+
+    public void AddToGameplayUI(Transform t)
+    {
+        t.SetParent(_gameplayPanel.transform);
     }
 }

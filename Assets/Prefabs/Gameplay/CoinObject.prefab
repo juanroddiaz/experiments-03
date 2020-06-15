@@ -271,6 +271,8 @@ MonoBehaviour:
   _feedbackObj: {fileID: 6676332536221862699, guid: 902f4e914382c6f4e852f550b96d4dde,
     type: 3}
   _animator: {fileID: 4378044879608606552}
+  _chestCounterPrefab: {fileID: 4773016959706866016, guid: 8f2894474d2627b4c86d3501c3141426,
+    type: 3}
   _coinSpriteObj: {fileID: 6030079711553707350}
   _chestChancePercentage: 5
   _chestBonusPercentage: 10

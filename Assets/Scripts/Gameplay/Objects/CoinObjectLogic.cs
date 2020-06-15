@@ -20,6 +20,8 @@ public class CoinObjectLogic : MonoBehaviour
     private LootRewardFeedback _feedbackObj;
     [SerializeField]
     private Animator _animator;
+    [SerializeField]
+    private ChestCounterLogic _chestCounterPrefab;
     [Header("Coins")]
     [SerializeField]
     private GameObject _coinSpriteObj;
@@ -37,10 +39,12 @@ public class CoinObjectLogic : MonoBehaviour
     private GameObject _currentSpriteObj;
     private Transform _hudCoinTarget;
     private HudGameplayController _hudGameplayController;
+    private ChestCounterLogic _currentChestCounter;
 
     public void Initialize(HudGameplayController hudGameplay)
     {
         SetState(CoinObjectState.Coin);
+        _currentChestCounter = null;
         _hudGameplayController = hudGameplay;
         _hudCoinTarget = hudGameplay.GetCoinHudTargetTransform();
     }
@@ -54,6 +58,11 @@ public class CoinObjectLogic : MonoBehaviour
         _animator.SetBool("Chest", !isCoin);
         _chestSpriteObj.SetActive(!isCoin);
         _currentSpriteObj = isCoin ? _coinSpriteObj : _chestSpriteObj;
+        if (isCoin && _currentChestCounter != null)
+        {
+            _currentChestCounter.OnFinish();
+            _currentChestCounter = null;
+        }
     }
 
     public int OnCollected(int currentCoins)
@@ -65,9 +74,10 @@ public class CoinObjectLogic : MonoBehaviour
                 ret = 1;
                 break;
             case CoinObjectState.Chest:
-                StopCoroutine(RunChestCountdown());
-                ret = Mathf.CeilToInt(currentCoins * (_chestBonusPercentage / 100.0f));
-                SetState(CoinObjectState.Coin);
+                {
+                    ret = Mathf.CeilToInt(currentCoins * (_chestBonusPercentage / 100.0f));
+                    SetState(CoinObjectState.Coin);
+                }
                 break;
         }
         _collider.enabled = false;
@@ -119,7 +129,17 @@ public class CoinObjectLogic : MonoBehaviour
 
     private IEnumerator RunChestCountdown()
     {
-        yield return new WaitForSeconds(_chestSpawnCountdown);
+        _currentChestCounter = Instantiate<ChestCounterLogic>(_chestCounterPrefab);
+        _hudGameplayController.AddToGameplayUI(_currentChestCounter.transform);
+        _currentChestCounter.Initialize(_chestSpriteObj.transform);
+        float countDown = _chestSpawnCountdown;
+        while (countDown > 0.0f && _currentChestCounter != null)
+        {
+            _currentChestCounter.UpdateValue(countDown);
+            countDown -= Time.deltaTime;
+            yield return null;
+        }
+
         SetState(CoinObjectState.Coin);
     }
 }
