@@ -170,9 +170,12 @@ MonoBehaviour:
   _tilemapGrid: {fileID: 1739777301}
   _emptyCellsParent: {fileID: 840428178}
   _coinPrefab: {fileID: 43162120, guid: 867d98c2dc85ca34c9010d4d8447e767, type: 3}
+  _timeBonusPrefab: {fileID: 4277410480191113961, guid: 4feeedd274369f049857ceee68deaa21,
+    type: 3}
   _levelTotalTime: 45
   _characterInitialPosition: {x: -8, y: -3}
   _levelLocalPosition: {x: -1, y: 0, z: 0}
+  _timeBonusPosition: {x: -8, y: 3}
 --- !u!1001 &7081309
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -67,6 +67,15 @@ public class CharacterManager : MonoBehaviour
         {
             Debug.Log(other);
             OnCoinCollected(other.transform.parent.GetComponent<CoinObjectLogic>());
+            return;
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Time"))
+        {
+            Debug.Log(other);
+            var timeLogic = other.transform.parent.GetComponent<TimeObjectLogic>();
+            timeLogic.OnCollected(10);
+            return;
         }
     }
 

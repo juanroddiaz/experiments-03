@@ -33,8 +33,11 @@ public class HudGameplayController : MonoBehaviour
     private TextMeshProUGUI _endLevelCoinsCounter;
     [SerializeField]
     private TextMeshProUGUI _endLevelMaxCoinsCounter;
+    [Header("Feedback")]
     [SerializeField]
     private Transform _coinTarget;
+    [SerializeField]
+    private Transform _timeTarget;
     [SerializeField]
     private TextMeshProUGUI _extraCoinsCounter;
     [SerializeField]
@@ -81,6 +84,11 @@ public class HudGameplayController : MonoBehaviour
     public Transform GetCoinHudTargetTransform()
     {
         return _coinTarget;
+    }
+
+    public Transform GetTimeHudTargetTransform()
+    {
+        return _timeTarget;
     }
 
     public void OnPause()

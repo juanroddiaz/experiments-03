@@ -239,6 +239,7 @@ MonoBehaviour:
   _endLevelCoinsCounter: {fileID: 7860379054178215982}
   _endLevelMaxCoinsCounter: {fileID: 601012744651150583}
   _coinTarget: {fileID: 5668493755839747825}
+  _timeTarget: {fileID: 7986602886620992413}
   _extraCoinsCounter: {fileID: 1472291756059275957}
   _extraCoinsAnimation: {fileID: 7207229908391654432}
 --- !u!111 &7207229908391654432

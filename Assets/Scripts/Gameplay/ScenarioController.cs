@@ -16,11 +16,15 @@ public class ScenarioController : MonoBehaviour
     [SerializeField]
     private CoinObjectLogic _coinPrefab;
     [SerializeField]
+    private TimeObjectLogic _timeBonusPrefab;
+    [SerializeField]
     private float _levelTotalTime = 20.0f;
     [SerializeField]
     private Vector2 _characterInitialPosition;
     [SerializeField]
     private Vector3 _levelLocalPosition = new Vector3(-1.0f, 0.0f, 0.0f);
+    [SerializeField]
+    private Vector2 _timeBonusPosition = Vector2.zero;
 
     private List<Vector3> _availableCells = new List<Vector3>();
     private GameLevelData _levelData;
@@ -65,19 +69,39 @@ public class ScenarioController : MonoBehaviour
                     continue;
                 }
 
+                bool isTimeBonus = _timeBonusPosition.x == n && _timeBonusPosition.y == p;
                 Vector3Int localPlace = (new Vector3Int(n, p, (int)tileMap.transform.position.y));
                 if (!tileMap.HasTile(localPlace))
                 {
                     //No tile at "place"
                     Vector3 place = tileMap.CellToWorld(localPlace);
                     _availableCells.Add(place);
-                    var emptyCellObj = Instantiate(_coinPrefab, _emptyCellsParent);
-                    emptyCellObj.name = "cell_" + n.ToString() + "_" + p.ToString();
-                    emptyCellObj.transform.position = place;
-                    emptyCellObj.GetComponent<CoinObjectLogic>().Initialize(_hud);
+                    if (isTimeBonus)
+                    {
+                        CreateTimeBonusInCell(place, n, p);
+                        continue;
+                    }
+
+                    CreateCoinInCell(place, n, p);
                 }
             }
         }
+    }
+
+    private void CreateTimeBonusInCell(Vector3 place, int n, int p)
+    {
+        var emptyCellObj = Instantiate(_timeBonusPrefab, _emptyCellsParent);
+        emptyCellObj.name = "Timecell_" + n.ToString() + "_" + p.ToString();
+        emptyCellObj.transform.position = place;
+        emptyCellObj.GetComponent<TimeObjectLogic>().Initialize(_hud, () => CreateCoinInCell(place, n, p));
+    }
+
+    private void CreateCoinInCell(Vector3 place, int n, int p)
+    {
+        var emptyCellObj = Instantiate(_coinPrefab, _emptyCellsParent);
+        emptyCellObj.name = "cell_" + n.ToString() + "_" + p.ToString();
+        emptyCellObj.transform.position = place;
+        emptyCellObj.GetComponent<CoinObjectLogic>().Initialize(_hud);
     }
 
     public void StartLevel()
