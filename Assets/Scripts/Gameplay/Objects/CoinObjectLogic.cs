@@ -116,6 +116,7 @@ public class CoinObjectLogic : MonoBehaviour
 
     private IEnumerator Respawn()
     {
+        _currentSpriteObj.SetActive(false);
         var countdown = Random.Range(_randomSpawnMinTime, _randomSpawnMaxTime);
         yield return new WaitForSeconds(countdown);
         _currentSpriteObj.SetActive(true);
