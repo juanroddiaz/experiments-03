@@ -141,6 +141,9 @@ public class CoinObjectLogic : MonoBehaviour
             yield return null;
         }
 
-        SetState(CoinObjectState.Coin);
+        if (_state == CoinObjectState.Chest)
+        {
+            SetState(CoinObjectState.Coin);
+        }        
     }
 }
