@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour
 
         _dataLoader.Initialize(GetAllLevelNames());
         _sceneLoader.Initialize();
+        SelectedLevelIdx = _dataLoader.LastSelectedLevel;
     }
 
     private List<string> GetAllLevelNames()
@@ -73,6 +74,7 @@ public class GameController : MonoBehaviour
     public void LoadGameplayScenario(int carouselIndex)
     {
         SelectedLevelIdx = carouselIndex;
+        _dataLoader.SaveLastSelectedLevel(carouselIndex);
         _sceneLoader.LoadGameplayScene();
     }
 

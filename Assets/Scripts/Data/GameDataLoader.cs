@@ -12,6 +12,9 @@ public class GameLevelData
 public class GameDataLoader : MonoBehaviour
 {
     public List<GameLevelData> GameData { get; private set; }
+    public int LastSelectedLevel { get; private set; }
+
+    private static string _lastSelectedLevelKey = "LastSelectedLevel";
 
     public void Initialize(List<string> levelNames)
     {
@@ -25,6 +28,12 @@ public class GameDataLoader : MonoBehaviour
                     MaxCoins = PlayerPrefs.GetInt(name)
                 });
             }            
+        }
+
+        LastSelectedLevel = 0;
+        if (PlayerPrefs.HasKey(_lastSelectedLevelKey))
+        {
+            LastSelectedLevel = PlayerPrefs.GetInt(_lastSelectedLevelKey);
         }
     }
 
@@ -63,5 +72,10 @@ public class GameDataLoader : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SaveLastSelectedLevel(int idx)
+    {
+        PlayerPrefs.SetInt(_lastSelectedLevelKey, idx);
     }
 }
