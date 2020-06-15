@@ -41,6 +41,8 @@ public class LootRewardFeedback : MonoBehaviour
     private Vector3 _initialScale = Vector3.one;
     [SerializeField]
     private Vector3 _beforeMovingScale = Vector3.one;
+    [SerializeField]
+    private ParticleSystem _mainParticleSystem;
 
     private Action _onFeedbackStarts;
     private Action<int> _onFeedbackReachedEnd;
@@ -58,7 +60,15 @@ public class LootRewardFeedback : MonoBehaviour
         _onFeedbackStarts?.Invoke();
         _onFeedbackReachedEnd = data.OnFeedbackReachedEnd;
         _amount = data.Amount;
+        InitParticle(_amount > 1);
         _state = LootRewardFeedbackState.Spawning;
+    }
+
+    private void InitParticle(bool isSpecial)
+    {
+        var main = _mainParticleSystem.main;
+        main.startColor = isSpecial ? Color.red : main.startColor.color;
+        _mainParticleSystem.Play();
     }
 
     void Update()
