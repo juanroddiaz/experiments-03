@@ -77,6 +77,12 @@ public class CharacterManager : MonoBehaviour
             timeLogic.OnCollected();
             return;
         }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Trap"))
+        {
+            Debug.Log("TRAP: " + other);            
+            return;
+        }
     }
 
     private void OnCoinCollected(CoinObjectLogic coinLogic)
