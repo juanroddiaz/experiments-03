@@ -8,6 +8,7 @@ public class LevelData
     public string Name;
     public GameObject GamePrefab;
     public Sprite MenuImage;
+    public Vector2 TimeBonusCellPosition;
 }
 
 public class GameController : MonoBehaviour

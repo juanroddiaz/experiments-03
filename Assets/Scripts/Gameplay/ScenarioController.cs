@@ -25,12 +25,11 @@ public class ScenarioController : MonoBehaviour
     private Vector3 _levelLocalPosition = new Vector3(-1.0f, 0.0f, 0.0f);
     [Header("Time Bonus")]
     [SerializeField]
-    private Vector2 _timeBonusPosition = Vector2.zero;
-    [SerializeField]
     private int _timeBonusInSeconds = 10;
 
     private List<Vector3> _availableCells = new List<Vector3>();
     private GameLevelData _levelData;
+    private Vector2 _timeBonusPosition = Vector2.zero;
 
     public float CurrentLevelTime { get; private set; }
     public bool LevelStarted { get; private set; }
@@ -42,6 +41,7 @@ public class ScenarioController : MonoBehaviour
         _hud.Initialize(this, _character.OnTapDown);
         // level init
         LevelData levelEntry = GameController.Instance.GetSelectedLevelData();
+        _timeBonusPosition = levelEntry.TimeBonusCellPosition;
         _levelData = new GameLevelData
         {
             Name = levelEntry.Name,

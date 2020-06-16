@@ -175,7 +175,6 @@ MonoBehaviour:
   _levelTotalTime: 30
   _characterInitialPosition: {x: -8, y: -3}
   _levelLocalPosition: {x: -1, y: 0, z: 0}
-  _timeBonusPosition: {x: -8, y: 3}
   _timeBonusInSeconds: 10
 --- !u!1001 &7081309
 PrefabInstance:
