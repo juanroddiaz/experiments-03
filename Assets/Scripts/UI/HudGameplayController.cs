@@ -169,6 +169,7 @@ public class HudGameplayController : MonoBehaviour
     public void AddToGameplayUI(Transform t)
     {
         t.SetParent(_gameplayPanel.transform);
+        t.localScale = Vector3.one;
     }
 
     public void OnDeath()
