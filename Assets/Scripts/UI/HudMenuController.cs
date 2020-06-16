@@ -19,7 +19,7 @@ public class HudMenuController : MonoBehaviour
     void Start()
     {
         _carouselLogic.Initialize();
-        _soundOn = GameController.Instance.IsMusicEnabled();
+        _soundOn = GameController.Instance.DataLoader.MusicOn;
         UpdateSoundImages();
     }
 

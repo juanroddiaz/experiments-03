@@ -12,10 +12,11 @@ public class SoundController : MonoBehaviour
 
     public bool IsEnabled { get => _audioMusicSource.enabled; set => _audioMusicSource.enabled = value; }
 
-    void Awake()
+    void Start()
     {
         _audioMusicSource = GetComponent<AudioSource>();
         _defaultVolume = _audioMusicSource.volume;
+        _audioMusicSource.enabled = GameController.Instance.DataLoader.MusicOn;
     }    
 
     public void Play(AudioClip clip)

@@ -12,9 +12,11 @@ public class GameLevelData
 public class GameDataLoader : MonoBehaviour
 {
     public List<GameLevelData> GameData { get; private set; }
+    public bool MusicOn { get; private set; }
     public int LastSelectedLevel { get; private set; }
 
     private static string _lastSelectedLevelKey = "LastSelectedLevel";
+    private static string _musicOnKey = "MusicOn";
 
     public void Initialize(List<string> levelNames)
     {
@@ -34,6 +36,11 @@ public class GameDataLoader : MonoBehaviour
         if (PlayerPrefs.HasKey(_lastSelectedLevelKey))
         {
             LastSelectedLevel = PlayerPrefs.GetInt(_lastSelectedLevelKey);
+        }
+        MusicOn = true;
+        if (PlayerPrefs.HasKey(_musicOnKey))
+        {
+            MusicOn = PlayerPrefs.GetInt(_musicOnKey, 1) == 1 ? true : false;
         }
     }
 
@@ -82,12 +89,19 @@ public class GameDataLoader : MonoBehaviour
             data.MaxCoins = 0;
             PlayerPrefs.SetInt(data.Name, 0);
         }
-        LastSelectedLevel = 0;
-        SaveLastSelectedLevel(LastSelectedLevel);
+        SaveLastSelectedLevel(0);
+        SaveMusicOnOption(true);
     }
 
     public void SaveLastSelectedLevel(int idx)
     {
+        LastSelectedLevel = idx;
         PlayerPrefs.SetInt(_lastSelectedLevelKey, idx);
+    }
+
+    public void SaveMusicOnOption(bool on)
+    {
+        MusicOn = on;
+        PlayerPrefs.SetInt(_musicOnKey, on ? 1 : 0);
     }
 }

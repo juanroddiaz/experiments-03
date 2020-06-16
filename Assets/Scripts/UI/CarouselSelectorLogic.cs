@@ -64,7 +64,7 @@ public class CarouselSelectorLogic : MonoBehaviour
             _images.Add(image);
         }
 
-        CurrentIndex = GameController.Instance.SelectedLevelIdx;
+        CurrentIndex = GameController.Instance.DataLoader.LastSelectedLevel;
         GoToIndex(CurrentIndex);
         _initialized = true;
     }

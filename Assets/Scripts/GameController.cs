@@ -32,8 +32,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
     public SceneLoader SceneLoader { get { return _sceneLoader; } }
     public GameDataLoader DataLoader => _dataLoader;
-    public int SelectedLevelIdx = 0;
-
+    
     private void Awake()
     {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("GameController");
@@ -47,7 +46,6 @@ public class GameController : MonoBehaviour
 
         _dataLoader.Initialize(GetAllLevelNames());
         _sceneLoader.Initialize();
-        SelectedLevelIdx = _dataLoader.LastSelectedLevel;
     }
 
     private List<string> GetAllLevelNames()
@@ -83,7 +81,6 @@ public class GameController : MonoBehaviour
     public void LoadGameplayScenario(int carouselIndex)
     {
         _soundController.Stop();
-        SelectedLevelIdx = carouselIndex;
         _dataLoader.SaveLastSelectedLevel(carouselIndex);
         _sceneLoader.LoadGameplayScene();
     }
@@ -98,7 +95,7 @@ public class GameController : MonoBehaviour
     {
         if (toggle)
         {
-            _soundController.Play(_levelData[SelectedLevelIdx].Music);
+            _soundController.Play(_levelData[_dataLoader.LastSelectedLevel].Music);
         }
         else
         {
@@ -108,23 +105,19 @@ public class GameController : MonoBehaviour
 
     public LevelData GetSelectedLevelData()
     {
-        return _levelData[SelectedLevelIdx];
+        return _levelData[_dataLoader.LastSelectedLevel];
     }
 
     public void DeleteData()
     {
         _dataLoader.DeleteData();
-        SelectedLevelIdx = _dataLoader.LastSelectedLevel;
         _sceneLoader.ReloadScene();
+        _soundController.IsEnabled = _dataLoader.MusicOn;
     }
 
     public void ToggleMusicEnabled()
     {
         _soundController.IsEnabled = !_soundController.IsEnabled;
-    }
-
-    public bool IsMusicEnabled()
-    {
-        return _soundController.IsEnabled;
+        _dataLoader.SaveMusicOnOption(_soundController.IsEnabled);
     }
 }
