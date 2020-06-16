@@ -35,6 +35,7 @@ public class CharacterManager : MonoBehaviour
     private static string _jumpAnimKey = "Jump";
     private static string _wallSlideAnimKey = "WallSlide";
     private static string _fallAnimKey = "Fall";
+    private static string _deathAnimKey = "Dead";
 
     public void Initialize(ScenarioController controller)
     {
@@ -80,7 +81,10 @@ public class CharacterManager : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Trap"))
         {
-            Debug.Log("TRAP: " + other);            
+            Debug.Log("TRAP: " + other);
+            SetAnimations(false, false, false, false);
+            _animator.SetBool(_deathAnimKey, true);
+            _sceneController.OnDeath();
             return;
         }
     }
@@ -189,6 +193,6 @@ public class CharacterManager : MonoBehaviour
         _animator.SetBool(_wallSlideAnimKey, wallSlide);
         _animator.SetBool(_fallAnimKey, falling);
         _animator.SetBool(_groundedAnimKey, IsGrounded);
-        _animator.SetBool(_runAnimKey, run && IsGrounded);        
+        _animator.SetBool(_runAnimKey, run && IsGrounded);
     }
 }

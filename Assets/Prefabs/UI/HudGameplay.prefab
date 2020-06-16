@@ -243,6 +243,7 @@ MonoBehaviour:
   _extraCoinsCounter: {fileID: 1472291756059275957}
   _extraTimeCounter: {fileID: 6561669636645710258}
   _feedbackAnimation: {fileID: 7207229908391654432}
+  _endTitleText: {fileID: 2787407023266767765}
 --- !u!111 &7207229908391654432
 Animation:
   m_ObjectHideFlags: 0
@@ -1902,7 +1903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 220
+    m_Left: 200
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -1969,7 +1970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: -600, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5993916817695982492
@@ -5650,7 +5651,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 0, y: 150}
+  m_SizeDelta: {x: 0, y: 180}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8334358668146357770
 CanvasRenderer:

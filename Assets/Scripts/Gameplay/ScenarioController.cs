@@ -80,18 +80,17 @@ public class ScenarioController : MonoBehaviour
                 {
                     //No tile at "place"
                     Vector3 place = tileMap.CellToWorld(localPlace);
+                    var spike = _spikesPosition.Find(pos => pos.CellCoords.x == n && pos.CellCoords.y == p);
+                    if (spike != null)
+                    {
+                        CreateSpikeInCell(place, spike);
+                    }
+
                     bool isTimeBonus = _timeBonusPosition.x == n && _timeBonusPosition.y == p;
                     if (isTimeBonus)
                     {
                         CreateTimeBonusInCell(place, n, p);
                         continue;
-                    }
-
-                    var spike = _spikesPosition.Find(pos => pos.CellCoords.x == n && pos.CellCoords.y == p);
-                    if (spike != null)
-                    {
-                        CreateSpikeInCell(place, spike);
-                        //continue;
                     }
 
                     CreateCoinInCell(place, n, p);
@@ -182,6 +181,12 @@ public class ScenarioController : MonoBehaviour
 
         // hud update time and check level end
         _hud.UpdateLevelCountdown(CurrentLevelTime, !LevelStarted);
+    }
+
+    public void OnDeath()
+    {
+        LevelStarted = false;
+        _hud.OnDeath();
     }
 
     public void OnQuit()

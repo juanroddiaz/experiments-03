@@ -245,11 +245,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HudGameplay
       objectReference: {fileID: 0}
-    - target: {fileID: 694300900622406788, guid: e5374238b59ed8745b114d54009b1d0b,
-        type: 3}
-      propertyPath: m_Padding.m_Left
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 1432292438716155295, guid: e5374238b59ed8745b114d54009b1d0b,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -298,11 +293,6 @@ PrefabInstance:
     - target: {fileID: 1769937535250473459, guid: e5374238b59ed8745b114d54009b1d0b,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3955142391978164203, guid: e5374238b59ed8745b114d54009b1d0b,
-        type: 3}
-      propertyPath: m_padding
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5668493755839747825, guid: e5374238b59ed8745b114d54009b1d0b,
@@ -383,26 +373,6 @@ PrefabInstance:
     - target: {fileID: 6036721437253444965, guid: e5374238b59ed8745b114d54009b1d0b,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6561669636645710258, guid: e5374238b59ed8745b114d54009b1d0b,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6561669636645710258, guid: e5374238b59ed8745b114d54009b1d0b,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6561669636645710258, guid: e5374238b59ed8745b114d54009b1d0b,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6561669636645710258, guid: e5374238b59ed8745b114d54009b1d0b,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6741963665216632376, guid: e5374238b59ed8745b114d54009b1d0b,
@@ -1354,11 +1324,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Character2D
-      objectReference: {fileID: 0}
-    - target: {fileID: 1662287353879820322, guid: d2042bc965a39d0449228beeb055d8fd,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1662287353879820323, guid: d2042bc965a39d0449228beeb055d8fd,
         type: 3}

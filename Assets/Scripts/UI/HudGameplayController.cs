@@ -44,6 +44,8 @@ public class HudGameplayController : MonoBehaviour
     private TextMeshProUGUI _extraTimeCounter;
     [SerializeField]
     private Animation _feedbackAnimation;
+    [SerializeField]
+    private TextMeshProUGUI _endTitleText;
 
     private ScenarioController _sceneController;
     private int _coinCounterVisualAmount = 0;
@@ -167,5 +169,12 @@ public class HudGameplayController : MonoBehaviour
     public void AddToGameplayUI(Transform t)
     {
         t.SetParent(_gameplayPanel.transform);
+    }
+
+    public void OnDeath()
+    {
+        _endTitleText.text = "OOP! CAREFUL!";
+        _endTitleText.color = Color.red;
+        OnFinishLevel();
     }
 }

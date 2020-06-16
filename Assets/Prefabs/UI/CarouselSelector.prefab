@@ -67,7 +67,6 @@ MonoBehaviour:
   _imageGap: 50
   _swipeThrustHold: 30
   CurrentIndex: 0
-  _initialized: 0
 --- !u!222 &746009091198365672
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -659,7 +658,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 800, y: 0}
+  m_SizeDelta: {x: 1000, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8497581723399070706
 CanvasRenderer:
