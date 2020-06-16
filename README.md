@@ -8,6 +8,7 @@ External Packages (unused assets were deleted):
 	* isometric-blocks
 	* tooncharacters
 	* uipack_fixed
+	* sounds
 * Sprite Trail Renderer, Little Pug Games: https://little-pug-games.itch.io/unity-sprite-trail-renderer
 
 "You could improve any aspect of the game to increase the user experience of players":
@@ -18,4 +19,10 @@ External Packages (unused assets were deleted):
 * Creates an unique time bonus per level, to add 10 seconds to current gameplay
 * Option to pause the game and go back to main menu: last selected level stored in device
 * Option to reset scores
-* Music!
+* Music! And of course "no music" button too
+* Dangerous Cave level: spikes instantly defeat you, finishing the level.
+
+Considerations:
+* I didn't implemented an object pool, but potentially I could use one for particles and feedback instances
+* I didn't use Scriptable Objects for data, but in case of, the Level Data in GameController prefab would be a candidate: this way some level design aspect would be easier to configure.
+* I used my very typical way to create logics between component: I didn't try to experiment with shaders or ECS/DOTS, as I wanted to deliver a more wholesome minigame as fast as I could. I'd like to go deep into ECS as next tech knowledge challenge.
