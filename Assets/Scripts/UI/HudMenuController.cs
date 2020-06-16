@@ -19,4 +19,9 @@ public class HudMenuController : MonoBehaviour
     {
         GameController.Instance.LoadGameplayScenario(_carouselLogic.CurrentIndex);
     }
+
+    public void OnResetDataClick()
+    {
+        GameController.Instance.DeleteData();
+    }
 }

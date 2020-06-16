@@ -83,4 +83,11 @@ public class GameController : MonoBehaviour
     {
         return _levelData[SelectedLevelIdx];
     }
+
+    public void DeleteData()
+    {
+        _dataLoader.DeleteData();
+        SelectedLevelIdx = _dataLoader.LastSelectedLevel;
+        _sceneLoader.ReloadScene();
+    }
 }

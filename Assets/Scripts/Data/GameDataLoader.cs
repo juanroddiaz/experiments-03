@@ -19,7 +19,7 @@ public class GameDataLoader : MonoBehaviour
     public void Initialize(List<string> levelNames)
     {
         GameData = new List<GameLevelData>();
-        foreach(var name in levelNames)
+        foreach (var name in levelNames)
         {
             if (PlayerPrefs.HasKey(name))
             {
@@ -27,7 +27,7 @@ public class GameDataLoader : MonoBehaviour
                     Name = name,
                     MaxCoins = PlayerPrefs.GetInt(name)
                 });
-            }            
+            }
         }
 
         LastSelectedLevel = 0;
@@ -64,14 +64,26 @@ public class GameDataLoader : MonoBehaviour
             return true;
         }
 
-        if(key.MaxCoins < data.MaxCoins)
+        if (key.MaxCoins < data.MaxCoins)
         {
+            key.MaxCoins = data.MaxCoins;
             // save
             PlayerPrefs.SetInt(data.Name, data.MaxCoins);
             return true;
         }
 
         return false;
+    }
+
+    public void DeleteData()
+    {
+        foreach (var data in GameData)
+        {
+            data.MaxCoins = 0;
+            PlayerPrefs.SetInt(data.Name, 0);
+        }
+        LastSelectedLevel = 0;
+        SaveLastSelectedLevel(LastSelectedLevel);
     }
 
     public void SaveLastSelectedLevel(int idx)
