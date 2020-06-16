@@ -18,4 +18,4 @@ External Packages (unused assets were deleted):
 * Creates an unique time bonus per level, to add 10 seconds to current gameplay
 * Option to pause the game and go back to main menu: last selected level stored in device
 * Option to reset scores
-* Music per stage
+* Music!

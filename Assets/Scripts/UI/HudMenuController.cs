@@ -9,10 +9,18 @@ public class HudMenuController : MonoBehaviour
     private CarouselSelectorLogic _carouselLogic;
     [SerializeField]
     private Button _playButton;
+    [SerializeField]
+    private GameObject _soundOnObj;
+    [SerializeField]
+    private GameObject _soundOffObj;
+
+    private bool _soundOn = true;
 
     void Start()
     {
         _carouselLogic.Initialize();
+        _soundOn = GameController.Instance.IsMusicEnabled();
+        UpdateSoundImages();
     }
 
     public void OnPlayButtonClick()
@@ -23,5 +31,18 @@ public class HudMenuController : MonoBehaviour
     public void OnResetDataClick()
     {
         GameController.Instance.DeleteData();
+    }
+
+    public void OnToggleSound()
+    {
+        _soundOn = !_soundOn;
+        UpdateSoundImages();
+        GameController.Instance.ToggleMusicEnabled();
+    }
+
+    private void UpdateSoundImages()
+    {
+        _soundOnObj.SetActive(_soundOn);
+        _soundOffObj.SetActive(!_soundOn);
     }
 }

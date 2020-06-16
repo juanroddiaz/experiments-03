@@ -20,7 +20,9 @@ public class GameController : MonoBehaviour
     private SceneLoader _sceneLoader;
     [SerializeField]
     private SoundController _soundController;
-
+    [Header("Audio")]
+    [SerializeField]
+    private AudioListener _audioListener;
     [SerializeField]
     private AudioClip _menuMusic;
 
@@ -114,5 +116,15 @@ public class GameController : MonoBehaviour
         _dataLoader.DeleteData();
         SelectedLevelIdx = _dataLoader.LastSelectedLevel;
         _sceneLoader.ReloadScene();
+    }
+
+    public void ToggleMusicEnabled()
+    {
+        _soundController.IsEnabled = !_soundController.IsEnabled;
+    }
+
+    public bool IsMusicEnabled()
+    {
+        return _soundController.IsEnabled;
     }
 }

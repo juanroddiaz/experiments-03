@@ -10,11 +10,13 @@ public class SoundController : MonoBehaviour
     private AudioSource _audioMusicSource;
     private float _defaultVolume = 0.0f;
 
+    public bool IsEnabled { get => _audioMusicSource.enabled; set => _audioMusicSource.enabled = value; }
+
     void Awake()
     {
         _audioMusicSource = GetComponent<AudioSource>();
         _defaultVolume = _audioMusicSource.volume;
-    }
+    }    
 
     public void Play(AudioClip clip)
     {
@@ -29,7 +31,9 @@ public class SoundController : MonoBehaviour
         if (fadeOut)
         {
             StartCoroutine(FadeOut());
+            return;
         }
+        _audioMusicSource.Stop();
     }
 
     public IEnumerator FadeOut()
