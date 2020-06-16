@@ -23,8 +23,11 @@ public class ScenarioController : MonoBehaviour
     private Vector2 _characterInitialPosition;
     [SerializeField]
     private Vector3 _levelLocalPosition = new Vector3(-1.0f, 0.0f, 0.0f);
+    [Header("Time Bonus")]
     [SerializeField]
     private Vector2 _timeBonusPosition = Vector2.zero;
+    [SerializeField]
+    private int _timeBonusInSeconds = 10;
 
     private List<Vector3> _availableCells = new List<Vector3>();
     private GameLevelData _levelData;
@@ -93,7 +96,11 @@ public class ScenarioController : MonoBehaviour
         var emptyCellObj = Instantiate(_timeBonusPrefab, _emptyCellsParent);
         emptyCellObj.name = "Timecell_" + n.ToString() + "_" + p.ToString();
         emptyCellObj.transform.position = place;
-        emptyCellObj.GetComponent<TimeObjectLogic>().Initialize(_hud, () => CreateCoinInCell(place, n, p));
+        emptyCellObj.GetComponent<TimeObjectLogic>().Initialize(_hud, _timeBonusInSeconds, () => 
+        {
+            CreateCoinInCell(place, n, p);
+            CurrentLevelTime += _timeBonusInSeconds;
+        });
     }
 
     private void CreateCoinInCell(Vector3 place, int n, int p)

@@ -11,22 +11,24 @@ public class TimeObjectLogic : MonoBehaviour
     private Transform _hudTimeTarget;
     private HudGameplayController _hudGameplayController;
     private Action _onAfterCollected;
+    private int _secondsAdded = 0;
 
-    public void Initialize(HudGameplayController hudGameplay, Action afterCollected)
+    public void Initialize(HudGameplayController hudGameplay, int seconds, Action afterCollected)
     {
         _hudGameplayController = hudGameplay;
-        _hudTimeTarget = hudGameplay.GetCoinHudTargetTransform();
+        _hudTimeTarget = hudGameplay.GetTimeHudTargetTransform();
         _onAfterCollected = afterCollected;
+        _secondsAdded = seconds;
     }
 
-    public void OnCollected(int amount)
+    public void OnCollected()
     {
-        GenerateRewardVfx(amount);
+        GenerateRewardVfx();
         _onAfterCollected.Invoke();
         Destroy(gameObject);
     }
 
-    private void GenerateRewardVfx(int amount)
+    private void GenerateRewardVfx()
     {
         var rewardGo = Instantiate(_feedbackObj);
         LootRewardFeedback feedback = rewardGo.GetComponent<LootRewardFeedback>();
@@ -37,8 +39,8 @@ public class TimeObjectLogic : MonoBehaviour
             StartTransform = transform,
             TargetPosition = Camera.main.ScreenToWorldPoint(targetPosition),
             OnFeedbackStarts = null,
-            OnFeedbackReachedEnd = _hudGameplayController.UpdateCoinCounter,
-            Amount = amount
+            OnFeedbackReachedEnd = _hudGameplayController.UpdateTimeCounter,
+            Amount = _secondsAdded
         };
         feedback.Init(data);
     }

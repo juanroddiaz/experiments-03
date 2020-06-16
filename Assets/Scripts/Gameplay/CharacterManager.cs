@@ -74,7 +74,7 @@ public class CharacterManager : MonoBehaviour
         {
             Debug.Log(other);
             var timeLogic = other.transform.parent.GetComponent<TimeObjectLogic>();
-            timeLogic.OnCollected(10);
+            timeLogic.OnCollected();
             return;
         }
     }
