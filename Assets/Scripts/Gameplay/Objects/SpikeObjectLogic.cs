@@ -10,6 +10,13 @@ public enum SpikePosition
     Bottom
 }
 
+[System.Serializable]
+public class SpikeData
+{
+    public Vector2 CellCoords;
+    public SpikePosition Position;
+}
+
 public class SpikeObjectLogic : MonoBehaviour
 {
     [SerializeField]

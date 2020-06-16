@@ -31,7 +31,7 @@ public class ScenarioController : MonoBehaviour
 
     private GameLevelData _levelData;
     private Vector2 _timeBonusPosition = Vector2.zero;
-    private List<Vector2> _spikesPosition = new List<Vector2>();
+    private List<SpikeData> _spikesPosition = new List<SpikeData>();
 
     public float CurrentLevelTime { get; private set; }
     public bool LevelStarted { get; private set; }
@@ -87,11 +87,11 @@ public class ScenarioController : MonoBehaviour
                         continue;
                     }
 
-                    bool isSpike = _spikesPosition.Exists(pos => pos.x == n && pos.y == p);
-                    if (isSpike)
+                    var spike = _spikesPosition.Find(pos => pos.CellCoords.x == n && pos.CellCoords.y == p);
+                    if (spike != null)
                     {
-                        CreateSpikeInCell(place, n, p);
-                        continue;
+                        CreateSpikeInCell(place, spike);
+                        //continue;
                     }
 
                     CreateCoinInCell(place, n, p);
@@ -112,12 +112,12 @@ public class ScenarioController : MonoBehaviour
         });
     }
 
-    private void CreateSpikeInCell(Vector3 place, int n, int p)
+    private void CreateSpikeInCell(Vector3 place, SpikeData spike)
     {
         var emptyCellObj = Instantiate(_spikePrefab, _emptyCellsParent);
-        emptyCellObj.name = "Spike_" + n.ToString() + "_" + p.ToString();
+        emptyCellObj.name = "Spike_" + spike.CellCoords.x.ToString() + "_" + spike.CellCoords.y.ToString();
         emptyCellObj.transform.position = place;
-        emptyCellObj.GetComponent<SpikeObjectLogic>().Initialize(SpikePosition.Left);
+        emptyCellObj.GetComponent<SpikeObjectLogic>().Initialize(spike.Position);
     }
 
     private void CreateCoinInCell(Vector3 place, int n, int p)

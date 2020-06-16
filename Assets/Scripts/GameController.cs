@@ -10,7 +10,7 @@ public class LevelData
     public Sprite MenuImage;
     public Vector2 TimeBonusCellPosition;
     public AudioClip Music;
-    public List<Vector2> SpikesPosition;
+    public List<SpikeData> SpikesPosition;
 }
 
 public class GameController : MonoBehaviour

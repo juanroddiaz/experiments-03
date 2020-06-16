@@ -201,8 +201,7 @@ MonoBehaviour:
     MenuImage: {fileID: 21300000, guid: cb7bc1714d2c2994b8f6b4e3cfef5b1a, type: 3}
     TimeBonusCellPosition: {x: -8, y: 3}
     Music: {fileID: 8300000, guid: dd79d504c5876be41ac539fb1ca04b3e, type: 3}
-    SpikesPosition:
-    - {x: -8, y: 4}
+    SpikesPosition: []
   - Name: ANOTHER CAVE MAZE
     GamePrefab: {fileID: 5809674223240184577, guid: e7070f8333583fb4ea42f585255f07cd,
       type: 3}
@@ -217,7 +216,32 @@ MonoBehaviour:
     TimeBonusCellPosition: {x: 8, y: 3}
     Music: {fileID: 8300000, guid: e7712347e67275d40ac030b62e21f576, type: 3}
     SpikesPosition:
-    - {x: -8, y: 4}
+    - CellCoords: {x: 7, y: 4}
+      Position: 2
+    - CellCoords: {x: 8, y: 4}
+      Position: 2
+    - CellCoords: {x: 9, y: 4}
+      Position: 2
+    - CellCoords: {x: 2, y: -3}
+      Position: 3
+    - CellCoords: {x: 3, y: -3}
+      Position: 3
+    - CellCoords: {x: 4, y: -3}
+      Position: 3
+    - CellCoords: {x: 7, y: -3}
+      Position: 3
+    - CellCoords: {x: 8, y: -3}
+      Position: 3
+    - CellCoords: {x: 9, y: -3}
+      Position: 3
+    - CellCoords: {x: 2, y: 4}
+      Position: 2
+    - CellCoords: {x: 4, y: 4}
+      Position: 2
+    - CellCoords: {x: 3, y: 4}
+      Position: 2
+    - CellCoords: {x: -1, y: -3}
+      Position: 1
 --- !u!114 &557154310284055203
 MonoBehaviour:
   m_ObjectHideFlags: 0
