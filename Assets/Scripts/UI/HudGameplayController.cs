@@ -130,6 +130,7 @@ public class HudGameplayController : MonoBehaviour
         _coinsCounter.text = "x" + _coinCounterVisualAmount.ToString();
         if (add > 1)
         {
+            _feedbackAnimation.Stop("ExtraCoins");
             _extraCoinsCounter.text = "+" + add.ToString();
             _extraCoinsCounter.gameObject.SetActive(true);
             _feedbackAnimation.Play("ExtraCoins");
