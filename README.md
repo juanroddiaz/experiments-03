@@ -6,6 +6,7 @@ External Packages (unused assets were deleted):
 * A lot of Kenney's free resources: https://www.kenney.nl/
 	* Fonts
 	* isometric-blocks
+	* tooncharacters
 	* uipack_fixed
 * Sprite Trail Renderer, Little Pug Games: https://little-pug-games.itch.io/unity-sprite-trail-renderer
 
@@ -16,3 +17,5 @@ External Packages (unused assets were deleted):
 * Adding visual countdown to grab a chest
 * Creates an unique time bonus per level, to add 10 seconds to current gameplay
 * Option to pause the game and go back to main menu: last selected level stored in device
+* Option to reset scores
+* Music per stage

@@ -114,11 +114,13 @@ public class ScenarioController : MonoBehaviour
     public void StartLevel()
     {
         LevelStarted = true;
+        GameController.Instance.ToggleCurrentLevelMusic(true);
         _character.StartLevel();
     }
 
     public void FinishLevel()
     {
+        GameController.Instance.ToggleCurrentLevelMusic(false);
         TogglePause(true);
         if (GameController.Instance.DataLoader.TrySaveLevelMaxCoins(new GameLevelData
         {

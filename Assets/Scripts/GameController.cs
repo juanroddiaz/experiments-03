@@ -9,6 +9,7 @@ public class LevelData
     public GameObject GamePrefab;
     public Sprite MenuImage;
     public Vector2 TimeBonusCellPosition;
+    public AudioClip Music;
 }
 
 public class GameController : MonoBehaviour
@@ -17,6 +18,11 @@ public class GameController : MonoBehaviour
     private GameDataLoader _dataLoader;
     [SerializeField]
     private SceneLoader _sceneLoader;
+    [SerializeField]
+    private SoundController _soundController;
+
+    [SerializeField]
+    private AudioClip _menuMusic;
 
     [SerializeField]
     private List<LevelData> _levelData;
@@ -74,9 +80,28 @@ public class GameController : MonoBehaviour
 
     public void LoadGameplayScenario(int carouselIndex)
     {
+        _soundController.Stop();
         SelectedLevelIdx = carouselIndex;
         _dataLoader.SaveLastSelectedLevel(carouselIndex);
         _sceneLoader.LoadGameplayScene();
+    }
+
+    public void LoadMainMenu()
+    {
+        _soundController.Play(_menuMusic);
+        _sceneLoader.LoadMainMenu();
+    }
+
+    public void ToggleCurrentLevelMusic(bool toggle)
+    {
+        if (toggle)
+        {
+            _soundController.Play(_levelData[SelectedLevelIdx].Music);
+        }
+        else
+        {
+            _soundController.Stop();
+        }
     }
 
     public LevelData GetSelectedLevelData()
