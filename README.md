@@ -1,6 +1,10 @@
 # experiments-03
 A test exercise as a variation of the King of Thieves game (a physics-based platformer)
 
+
+![Menu](/Images/exp1_01.gif)
+![Gameplay](/Images/exp1_02.gif)
+
 External Packages (unused assets were deleted):
 * Free Platform Game Assets, Bayat Games: https://assetstore.unity.com/packages/2d/environments/free-platform-game-assets-85838
 * A lot of Kenney's free resources: https://www.kenney.nl/
